@@ -1,172 +1,197 @@
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.cdnfonts.com/css/rawline" rel="stylesheet">
-            
-    <title>Pagamento Pendente</title>
-    <style>
-        body {
-    font-family: 'Rawline', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #eaeaea;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+<html lang="pt-br"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.cdnfonts.com/css/rawline" rel="stylesheet">
+                
+        <title>Pagamento Pendente</title>
+        <style>
+            body {
+                 font-family: 'Rawline', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #eaeaea;
+            }
 
-.container {
-    max-width: 365px; /* Limite máximo de largura */
-    width: 100%; /* Permite que cresça até o limite máximo */
-    margin: auto; /* Centraliza na tela quando menor que o max-width */
-    background-color: #D6468E;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px; /* Adicionado para suavizar as bordas */
-}
+            .container {
+                width: 365px;
+                height: 700px;
+                padding: 0px 0px 0px 0px;
+                background-color: #D6468E;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
 
-/* Ajustes responsivos adicionais para telas menores */
-@media (max-width: 400px) {
-    .container {
-        margin: 20px; /* Adiciona um pouco de espaço nas laterais em telas muito pequenas */
-        transform: none; /* Remove transformação em telas pequenas */
-    }
+            .header {
+                background-image: url('https://s3.typebot.io/public/workspaces/clpwrgv88001vlh0fl3wduaqz/typebots/clsoykmoc0001o1a8fuuy3j8r/blocks/z8nhply1ap7tgvjamkhx6gbt?v=1709692314467');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-size: 100%;
+                color: white;
+                padding: 60px;
+            }
 
-    .header, .value-date-container, .status-alert, .receiver-info {
-        margin: 10px; /* Menos margem em elementos internos para economizar espaço */
-        padding: 10px; /* Ajusta o padding para economizar espaço */
-    }
-    
-    .value-date label, .value-date p, .status-text, .receiver-info h2, .receiver-info label, .receiver-info p {
-        font-size: smaller; /* Diminui o tamanho da fonte para se adequar a telas menores */
-    }
-}
+            .value-date-container {
+                background-color: #fff;
+                border-radius: 8px;
+                padding: 15px;
+                margin: -30px 20px 15px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+            }
 
-/* Pode adicionar mais regras aqui para outros ajustes específicos de tamanho */
+            .value-date {
+                text-align: left;
+                position: relative;
+                padding: 0 10px;
+                z-index: 1;
+            }
 
+            .value-date
+                label {
+                font-size: 17px;
+                color: #666;
+                font-weight: bold;
+            }
 
-        .header {
-            background-image: url('https://s3.typebot.io/public/workspaces/clpwrgv88001vlh0fl3wduaqz/typebots/clsoykmoc0001o1a8fuuy3j8r/blocks/z8nhply1ap7tgvjamkhx6gbt?v=1709692314467');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-size: 100%;
-            color: white;
-            padding: 60px;
-            border-radius: 10px;
-        }
+            .value-date
+                p {
+                font-size: 21px; /* Increased font-size for better match */
+                color: #D6468E;
+                font-weight: 800; /* Make the value bold */
+                margin: 2px 0px 0px 0px;
+            }
 
-        .value-date-container {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 15px;
-            margin: -30px 20px 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+            .status-alert {
+                background-color: #f7f7f7;
+                color: #333;
+                text-align: left;
+                padding: 20px 20px;
+                font-weight: bold;
+                margin: 0 20px;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
 
-        .value-date {
-            text-align: left;
-        }
+            .status-alert
+                img {
+                height: 45px;
+                margin-right: 19px;
+            }
 
-        .value-date label {
-            font-size: 17px;
-            color: #666;
-            font-weight: bold;
-        }
+            .status-text {
+                color: #ff635f;
+                font-size: 18px;
+            }
 
-        .value-date p {
-            font-size: 21px;
-            color: #D6468E;
-            font-weight: 800;
-            margin: 2px 0px 0px 0px;
-        }
+            .status-text
+                strong {
+                font-weight: bold;
+                color: #d9534f;
+                margin-bottom: 5px;
+            }
 
-        .status-alert {
-            background-color: #f7f7f7;
-            color: #333;
-            text-align: left;
-            padding: 20px 20px;
-            font-weight: bold;
-            margin: 0 20px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+            .receiver-info {
+                padding: 20px;
+                background-color: #f7f7f7;
+                border-radius: 4px;
+                margin: 15px 20px 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
 
-        .status-alert img {
-            height: 45px;
-            margin-right: 19px;
-        }
+            .receiver-info
+                h2 {
+                font-size: 18px;
+                color: #333;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
 
-        .status-text {
-            color: #ff635f;
-            font-size: 18px;
-            font-weight: 100;
-        }
+            .receiver-info
+                label {
+                font-size: 16px;
+                color: #666;
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
+            }
 
-        .status-text strong {
-            font-weight: bold;
-            color: red;
-        }
-
-        .receiver-info {
-            padding: 20px;
-            background-color: #f7f7f7;
-            border-radius: 4px;
-            margin: 15px 20px 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .receiver-info h2, .receiver-info label, .receiver-info p {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .receiver-info label {
-            color: #666;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header"></div>
-        <div class="value-date-container">
-            <div class="value-date">
-                <label>Valor</label>
-                <p id="ticket">{{ticket}}</p>
+            .receiver-info
+                p {
+                font-size: 18px;
+                color: #333;
+                margin: 5px 0px 10px 0px;
+                font-weight: bold;
+            }
+            .receiver-info
+                p {
+                font-size: 18px;
+                color: #333;
+                margin: 5px 0px 10px 0px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body cz-shortcut-listen="true">
+        <div class="container" style="
+        transform: scale(0.78);
+        margin: -60px 0px 0px -30px;
+    ">
+            <div class="header" style="border-radius: 10px;">
             </div>
-            <div class="value-date" style="text-align: center;">
-                <label>Data</label>
-                <p><span style="font-size: 20px; font-weight: 800;">05/04/2024</span><br><span style="font-size: 21px; font-weight: 500;">18:51:44</span></p>
+            <div class="value-date-container">
+                <div class="value-date">
+                    <label>Valor</label>
+                    <p id="ticket">{{ticket}}</p>
+                </div>
+                <div class="value-date" style="
+        text-align: center;
+    ">
+                    <label style="">Data</label>
+                    <p style="
+        margin: 1px 0px -4px 0px;
+    "><span style="
+        font-size: 20px;
+        font-weight: 800;
+    ">05/04/2024</span><br><span style="
+        font-size: 21px;
+        font-weight: 500;
+    ">18:13:13</span></p>
+                </div>
+            </div>
+            <div class="status-alert">
+                <img src="https://s3.typebot.io/public/workspaces/clpwrgv88001vlh0fl3wduaqz/typebots/clsoykmoc0001o1a8fuuy3j8r/blocks/x6j1c4cd706xk4eqprrumdcp?v=1709150901064" alt="Erro">
+                <div class="status-text" style="
+        font-size: 18px;
+        font-weight: 100;
+    ">
+                    <strong style="
+        font-size: 20px;
+        color: red;
+    ">Liberação pendente!</strong><br>
+                    <strong style="
+        font-size: 18px;
+        color: red;
+        font-weight: 500;
+    ">Aguardando Pagamento da Tarifa Transacional.</strong>
+                </div>
+            </div>
+            <div class="receiver-info">
+                <h2>Dados do Recebedor:</h2>
+                <label>Nome</label>
+                <p id="nome">{{nome}}</p>
+                <label>CPF</label>
+                <p id="cpf">{{cpf}}</p>
+                <label>Data de Nascimento</label>
+                <p id="nasc">{{nascimento}}</p>
+                <label>Chave Pix:</label>
+                <p id="pix">{{pix}}</p>
             </div>
         </div>
-        <div class="status-alert">
-            <img src="https://s3.typebot.io/public/workspaces/clpwrgv88001vlh0fl3wduaqz/typebots/clsoykmoc0001o1a8fuuy3j8r/blocks/x6j1c4cd706xk4eqprrumdcp?v=1709150901064" alt="Erro">
-            <div class="status-text">
-                <strong>Liberação pendente!</strong><br>
-                <strong>Aguardando Pagamento da Tarifa Transacional.</strong>
-            </div>
-        </div>
-        <div class="receiver-info">
-            <h2>Dados do Recebedor:</h2>
-            <label>Nome</label>
-            <p id="nome">{{nome}}</p>
-            <label>CPF</label>
-            <p id="cpf">{{cpf}}</p>
-            <label>Data de Nascimento</label>
-            <p id="nasc">{{nascimento}}</p>
-            <label>Chave Pix:</label>
-            <p id="pix">{{pix}}</p>
-        </div>
-    </div>
-    <script>
+        <script>
             // Função para obter os parâmetros da URL
             function getQueryParams() {
                 var params = {};
@@ -222,5 +247,7 @@
                 updateDateTime();
             };
         </script>
-</body>
-</html>
+        
+
+
+    </body></html>
